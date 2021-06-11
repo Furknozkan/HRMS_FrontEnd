@@ -14,7 +14,19 @@ export default function JobPostingList() {
 
 
     return (
-        <div>
+       
+          
+
+
+
+
+
+
+
+
+
+
+       <div>
             <Table basic='very' celled collapsing>
                 <Table.Header>
                     <Table.Row>

@@ -5,10 +5,10 @@ export default function Categories() {
     return (
         <div>
             <Menu vertical className="categories">
-        <Menu.Item>
+        <Menu.Item >
           <Input placeholder='Sektör ara...' />
         </Menu.Item>
-
+                
         <Menu.Item className="search">
          <b>Popüler sektörler</b>
           <Menu.Menu>

@@ -1,92 +1,68 @@
-import React from "react";
+import React from 'react'
+import "./Footer.css"
+const Footer = () => {
+    return(
+        <div className="main-footer">
+            <div className="container">
+                <div className="row">
+                    {/*Column1*/}
+                    <div className="col">
+                        <h4>İletişim</h4>
+                        <ul className="list-unstyled">
+                            <li>E-Mail</li>
+                            <li>Fax</li>
+                            <li>Canlı destek</li>
+                        </ul>
+                    </div>
+                    {/*Column2*/}
+                    <div className="col">
+                        <h4>Bizi Takip Edin</h4>
+                        <ul className="list-unstyled">
+                            <li>İnstagram</li>
+                            <li>Twitter</li>
+                            <li>Facebook</li>
 
-export default function Footer() {
-  return (
-    <div>
-      <div className="footer">
-        <div className="row footer-top">
-          <div className="col-lg-6">
-            <a href="/#" className="logo">
-            👨‍💼HRMS
-            </a>
-          </div>
-          <div className="col-lg-2 footer-menu">
-            <nav>
-              <h5>İletişim</h5>
-              <ul>
-                <li>
-                  <a href="/#">Mail</a>
-                </li>
-                <li>
-                  <a href="/#">Teknik Destek</a>
-                </li>
-                <li>
-                  <a href="/#">Canlı Destek</a>
-                </li>
-              </ul>
-            </nav>
+                        </ul>
 
 
-          </div>
-          <div className="col-lg-2 footer-menu">
-            <nav>
-              <h5>Topluluk</h5>
-              <ul>
-                <li>
-                  <a href="/#">Hakkımızda</a>
-                </li>
-                <li>
-                  <a href="/#">Sorun Bildir</a>
-                </li>
-               
-              </ul>
-            </nav>
-          </div>
-          <div className="col-lg-2 footer-menu">
-            <nav>
-              <h5>Yardımcı Kaynaklar</h5>
-              <ul>
-                
-                <li>
-                  <a href="/#">CV Rehberi</a>
-                </li>
-                <li>
-                  <a href="/#">Kullanım</a>
-                </li>
-                <li>
-                  <a href="/#">Sık Sorulan Sorular</a>
-                </li>
-               
-                <li>
-                  <a href="/#">Kariyer</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          
-          <div className="footer-bottom">
-            <p>
-              &copy; 2021 . All rights reserved.
-            </p>
-            <nav className="footer-menu d-inline">
-              <ul>
-                <li>
-                  <a href="/#">Kullanım Koşulları</a>
-                </li>
-                <li>
-                  <a href="/#">Gizlilik Politikası</a>
-                </li>
-                <li>
-                  <a href="/#">Güvenlik</a>
-                </li>
-                
-            
-              </ul>
-            </nav>
-           
-          </div>
+                    </div>
+                     {/*Column3*/}
+                     <div className="col">
+                        <h4>Bloglar</h4>
+                        <ul className="list-unstyled">
+                            <li>Vizyonumuz</li>
+                            <li>Misyonumuz</li>
+                            <li>Hedeflerimiz</li>
+
+                        </ul>
+
+
+                    </div>
+                    {/*Column3*/}
+                    <div className="col">
+                        <h4>Faydalı Linkler</h4>
+                        <ul className="list-unstyled">
+                            <li>Sıkça sorulanlar</li>
+                            <li>HRMS nedir?</li>
+                            <li>İş ilanları</li>
+
+                        </ul>
+
+
+                    </div>
+                    
+
+                </div>
+                <hr/>
+                <div className="row">
+                    <p className="col-sm">
+                        &copy;{new Date().getFullYear()} All rights reserved
+
+                    </p>
+
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    )
 }
+export default Footer;
