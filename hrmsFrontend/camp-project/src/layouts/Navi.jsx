@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { Button, Container, Dropdown, Menu } from 'semantic-ui-react'
 
 
@@ -35,6 +36,7 @@ name='Bize Katıl'
                                 <Dropdown.Item>Giriş yap</Dropdown.Item>
                                 <Dropdown.Item>Kayıt ol</Dropdown.Item>
                                 <Dropdown.Item>Ücretsiz dene</Dropdown.Item>
+                                <Dropdown.Item as={NavLink} to="/AddJobPosting">İlan Yayınla</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
 

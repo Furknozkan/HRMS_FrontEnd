@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Container } from 'semantic-ui-react';
 import Navi from './layouts/Navi';
 
-import Slider from './layouts/Slider'
+import Slider from './layouts/Slider';
 import Footer from './layouts/Footer';
 
 function App() {
@@ -19,8 +19,11 @@ function App() {
       <Slider />
       <Container className="main">
         <Dashboard />
+        
       </Container>
+      
       <Footer />
+      
       </div>
       
       

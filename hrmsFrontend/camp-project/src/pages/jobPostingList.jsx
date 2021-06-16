@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table } from 'semantic-ui-react'
+import {  Card } from 'semantic-ui-react'
 import JobPostingService from "../services/JobPostingService"
 
 export default function JobPostingList() {
@@ -8,66 +8,40 @@ export default function JobPostingList() {
 
     useEffect(() => {
         let jobPostingService = new JobPostingService()
-        jobPostingService.getJobPostings().then(result=>setjobPostings(result.data.data))
-       
+        jobPostingService.getJobPostings().then(result => setjobPostings(result.data.data))
+
     }, [])
 
 
     return (
-       
-          
+        <div>
+            <Card.Group>
+                {jobPostings.map((jobPosting)=>(
+                    
+                <Card fluid color="blue" key={jobPosting.id}>
 
+                    <Card.Content >
+                        <Card.Header textAlign="left">{jobPosting.jobName}</Card.Header>
+                        <hr />
+                        <Card.Header textAlign="left">{jobPosting.companyName}</Card.Header>
+                        <Card.Description textAlign="left"  content= {jobPosting.city.cityName} /> 
+                        <hr/>
+                        <Card.Description textAlign="left" content={jobPosting.jobDescription} />
+                        <Card.Description textAlign="left" content={"Maaş: " + jobPosting.minSalary + " - " + jobPosting.maxSalary} />
+                        <Card.Description textAlign="right" content={jobPosting.releaseDate} />
+                    </Card.Content>
+                </Card>
+                ))}
+            </Card.Group>
 
-
-
-
-
-
-
-
-
-       <div>
-            <Table basic='very' celled collapsing>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Job Name</Table.HeaderCell>
-                        <Table.HeaderCell>Description</Table.HeaderCell>
-                        <Table.HeaderCell>Min. Salary</Table.HeaderCell>
-                        <Table.HeaderCell>Max. Salary</Table.HeaderCell>
-                        <Table.HeaderCell>Number of Open Positions</Table.HeaderCell>
-                        <Table.HeaderCell>Application Deadline</Table.HeaderCell>
-                        <Table.HeaderCell>Release Date</Table.HeaderCell>
-                        <Table.HeaderCell>Company</Table.HeaderCell>
-                        <Table.HeaderCell>City</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                    {
-                        jobPostings.map(jobPostings => (
-                            <Table.Row>
-                                <Table.Cell>{jobPostings.jobName}</Table.Cell>
-                                <Table.Cell>{jobPostings.jobDescription}</Table.Cell>
-                                <Table.Cell>{jobPostings.minSalary}</Table.Cell>
-                                <Table.Cell>{jobPostings.maxSalary}</Table.Cell>
-                                <Table.Cell>{jobPostings.numberOfOpenPositions}</Table.Cell>
-                                <Table.Cell>{jobPostings.applicationDeadline}</Table.Cell>
-                                <Table.Cell>{jobPostings.releaseDate}</Table.Cell>
-                                <Table.Cell>{jobPostings.companyName}</Table.Cell>
-                                <Table.Cell>{jobPostings.city.name}</Table.Cell>
-             
-
-                            </Table.Row>
-
-                        ))
-                    }
-
-
-
-
-
-                </Table.Body>
-            </Table>
         </div>
+
+
+
+
+
+
+
+        
     )
 }

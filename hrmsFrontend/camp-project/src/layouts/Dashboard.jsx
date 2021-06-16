@@ -2,6 +2,8 @@ import React from 'react'
 import JobPostingList from '../pages/jobPostingList'
 import Categories from './Categories'
 import {Grid} from 'semantic-ui-react'
+import { Route } from 'react-router'
+import AddJobPosting from '../pages/AddJobPosting'
 
 export default function Dashboard() {
     return (
@@ -12,7 +14,10 @@ export default function Dashboard() {
                         <Categories /> 
                     </Grid.Column>
                     <Grid.Column width={12}>
-                        <JobPostingList />
+                        <Route exact path="/" component={JobPostingList}/>
+                        <Route exact path="/jobPostings" component={JobPostingList}/>
+                        <Route path="/AddJobPosting" component={AddJobPosting}/>
+
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
