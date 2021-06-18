@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, setNestedObjectValues } from "formik";
 
-import { Grid, Dropdown, Menu, Header, Segment, FormGroup, FormField, Label } from 'semantic-ui-react';
+import { Grid, FormField } from 'semantic-ui-react';
 import * as Yup from 'yup';
 import './AddJobPosting.css';
 import JobPostingService from '../services/JobPostingService';
@@ -19,10 +19,11 @@ export default function AddJobPosting() {
       }, []);
     
 
-      var cityOptions = cities.map(function (city) {
-        return { key: city.id, text: city.name, value: city.id, id: city.id };
+      var cityOptions = cities.map(function(city) {
+        return { key: city.city_id, text: city.cityName, value: city.city_id };
+        
       });
-
+console.log(cities)
     let schema = Yup.object().shape({
         jobName: Yup.string().required("Doldurulması Zorunlu Alan"),
         jobDescription: Yup.string().required("Doldurulması Zorunlu Alan"),
@@ -44,6 +45,7 @@ export default function AddJobPosting() {
 
 
             <div className="magic-form">
+                
                 <Formik
                     initialValues={{
                         jobName: '',
@@ -81,7 +83,7 @@ export default function AddJobPosting() {
                         handleChange,
                         handleBlur
                     }) => (
-                        <form className="magic-form" onSubmit={handleSubmit}>
+                        <Form className="magic-form" onSubmit={handleSubmit}>
                             <h1>İş İlanı Ekle</h1>
                             <Grid>
                                 <Grid.Column width={8} >
@@ -226,9 +228,10 @@ export default function AddJobPosting() {
                                             id={cityOptions.text}
                                             onChange={handleChange}
                                             options={cityOptions}
+                                            className="Select"
                                             label="City"
                                             value={values.cityId || ""}
-                                            onBlur={handleBlur}
+                                           // onBlur={handleBlur}
                                             touched={values.cityId}
                                             style={{ display: "block" }}
                                         >
@@ -322,7 +325,7 @@ export default function AddJobPosting() {
             />
 
 
-                        </form>
+                        </Form>
                     )}
                 </Formik>
             </div>
