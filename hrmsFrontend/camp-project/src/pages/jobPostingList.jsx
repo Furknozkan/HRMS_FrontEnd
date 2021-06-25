@@ -6,15 +6,19 @@ export default function JobPostingList() {
 
     const [jobPostings, setjobPostings] = useState([]);
 
+   
+      
+
     useEffect(() => {
         let jobPostingService = new JobPostingService()
-        jobPostingService.getJobPostings().then(result => setjobPostings(result.data.data))
+        jobPostingService.getByEnableTrue().then(result => setjobPostings(result.data.data))
 
-    }, [])
+    }, [jobPostings])
 
 
     return (
         <div>
+  
             <Card.Group>
                 {jobPostings.map((jobPosting)=>(
                     
@@ -24,16 +28,17 @@ export default function JobPostingList() {
                         <Card.Header textAlign="left">{jobPosting.jobName}</Card.Header>
                         <hr />
                         <Card.Header textAlign="left">{jobPosting.companyName}</Card.Header>
-                        <Card.Description textAlign="left"  content= {jobPosting.city.cityName} /> 
+                        <Card.Description textAlign="left"  content={jobPosting.city.cityName} /> 
                         <hr/>
                         <Card.Description textAlign="left" content={jobPosting.jobDescription} />
                         <Card.Description textAlign="left" content={"Maaş: " + jobPosting.minSalary + " - " + jobPosting.maxSalary} />
+                        <Card.Description textAlign="left" content={"Açık pozisyon: " + jobPosting.numberOfOpenPositions}/>
                         <Card.Description textAlign="right" content={jobPosting.releaseDate} />
                     </Card.Content>
                 </Card>
                 ))}
             </Card.Group>
-
+            
         </div>
 
 

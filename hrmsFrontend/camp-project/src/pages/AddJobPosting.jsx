@@ -1,29 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { Formik, setNestedObjectValues } from "formik";
+import { Formik } from "formik";
 
 import { Grid, FormField } from 'semantic-ui-react';
 import * as Yup from 'yup';
 import './AddJobPosting.css';
 import JobPostingService from '../services/JobPostingService';
-import {getCities} from '../services/CityService';
-import { Form, Input, SubmitButton, ResetButton, TextArea, Select } from 'formik-semantic-ui-react'
+import { getCities } from '../services/CityService';
+import {getWorkTimes} from '../services/WorkTimeService'
+import { Form,  SubmitButton,  Select } from 'formik-semantic-ui-react'
+import { getWorkPlaces } from '../services/WorkPlacesService';
 
 
 export default function AddJobPosting() {
     let jobPostingService = new JobPostingService();
+    
+
 
     const [cities, setCities] = useState([]);
 
+    const [workTimes, setWorkTimes] = useState([]);
+
+    const [workPlaces, setWorkPlaces] = useState([]);
+
     useEffect(() => {
         getCities().then((sonuc) => setCities(sonuc.data.data));
-      }, []);
-    
+    }, []);
 
-      var cityOptions = cities.map(function(city) {
+    useEffect(() => {
+        getWorkTimes().then((sonuc) => setWorkTimes(sonuc.data.data));
+    }, []);
+
+    useEffect(() => {
+        getWorkPlaces().then((sonuc) => setWorkPlaces(sonuc.data.data));
+    }, []);
+
+
+    var cityOptions = cities.map(function (city) {
         return { key: city.city_id, text: city.cityName, value: city.city_id };
-        
-      });
-console.log(cities)
+
+    });
+
+    var workTimeOptions = workTimes.map(function (workTime) {
+        return { key: workTime.workTimeId, text: workTime.workTimeName, value: workTime.workTimeId};
+    })
+
+    var workPlaceOptions = workPlaces.map(function (workPlace) {
+        return { key: workPlace.workPlaceId, text: workPlace.workPlaceName, value: workPlace.workPlaceId};
+    })
+    console.log(cities)
+    console.log(workTimes)
     let schema = Yup.object().shape({
         jobName: Yup.string().required("Doldurulması Zorunlu Alan"),
         jobDescription: Yup.string().required("Doldurulması Zorunlu Alan"),
@@ -34,8 +59,8 @@ console.log(cities)
         releaseDate: Yup.date().required("Doldurulamsı Zorunlu Alan"),
         companyName: Yup.string().required("Dolduruması Zorunlu Alan"),
         cityId: Yup.number().required("Doldurulması Zorunlu Alan"),
-        workPlace: Yup.string().required("Doldurulması Zorunlu Alan").oneOf(['iş yerinde', 'uzaktan (remote) ']),
-        workTime: Yup.string().required("Doldurulması Zorunlu Alan").oneOf(['Sürekli / Tam zamanlı', 'Dönemsel / Proje bazlı', 'Stajyer', 'Yarı zamanlı / Part Time', 'Serbest Zamanlı'])
+        workPlaceId: Yup.number().required("Doldurulması Zorunlu Alan").oneOf(['iş yerinde', 'uzaktan (remote) ']),
+        workTimeId: Yup.number().required("Doldurulması Zorunlu Alan")
 
     });
 
@@ -45,7 +70,7 @@ console.log(cities)
 
 
             <div className="magic-form">
-                
+
                 <Formik
                     initialValues={{
                         jobName: '',
@@ -57,8 +82,8 @@ console.log(cities)
                         releaseDate: '',
                         companyName: '',
                         cityId: '',
-                        workPlace: '',
-                        workTime: ''
+                        workPlaceId: '',
+                        workTimeId: ''
                     }}
 
                     validationSchema={schema}
@@ -220,7 +245,7 @@ console.log(cities)
                                         onChange={handleChange}
                                     />
                                 </Grid.Column>
-                                
+
                                 <Grid.Column width={8}>
                                     <FormField>
                                         <Select
@@ -231,7 +256,7 @@ console.log(cities)
                                             className="Select"
                                             label="City"
                                             value={values.cityId || ""}
-                                           // onBlur={handleBlur}
+                                            // onBlur={handleBlur}
                                             touched={values.cityId}
                                             style={{ display: "block" }}
                                         >
@@ -239,66 +264,42 @@ console.log(cities)
                                         </Select>
                                     </FormField>
 
-                                   
+
                                 </Grid.Column>
                             </Grid>
 
                             <Grid>
                                 <Grid.Column width={8}>
-
-
-
-                                    <label htmlFor="workPlace" className="top-margin">
-                                        Çalışma Yeri
-                                    </label>
-                                    <select
-                                        id="workPlace"
-                                        value={values.workPlace}
-                                        onChange={handleChange}
-                                    /*style={{
-                                        marginTop: 10,
-                                        width: '220px',
-                                        padding: '12px 30px',
-                                        outline: 'none',
-                                    }}*/
-                                    >
-
-                                        <option value="" label="Çalışma Yerini seç.." />
-                                        <option value="iş yerinde" label="iş yerinde" />
-                                        <option value="uzaktan (remote)" label="uzaktan (remote)" />
-                                    </select>
-
-                                    {errors.workPlace && touched.workPlace && (
-                                        <div className="input-feedback">{errors.workPlace}</div>
-                                    )}
+                                        <FormField>
+                                            <Select
+                                            name="workPlaceId"
+                                            id={workPlaceOptions.text}
+                                            onChange={handleChange}
+                                            options={workTimeOptions}
+                                            className="Select"
+                                            label="workPlace"
+                                            value={values.workTimeId || ""}
+                                            touched={values.workTimeId}
+                                            style={{display: "block"}}
+                                            ></Select>
+                                        </FormField>
                                 </Grid.Column>
                                 <Grid.Column width={8}>
+                                        <FormField>
+                                            <Select
+                                            name="workTimeId"
+                                            id={workTimeOptions.text}
+                                            onChange={handleChange}
+                                            options={workTimeOptions}
+                                            className="Select"
+                                            label="WorkTime"
+                                            value={values.workTimeId || ""}
+                                            touched={values.workTimeId}
+                                            style={{ display: "block" }}
+                                            >
 
-                                    <label htmlFor="workTime" className="top-margin">
-                                        Çalışma Zamanı
-                                    </label>
-                                    <select
-                                        id="workTime"
-                                        value={values.workTime}
-                                        onChange={handleChange}
-                                        style={{
-
-
-
-                                        }}
-
-                                    >
-                                        <option value="" label="Çalışma Zamanı seç.." />
-                                        <option value="Sürekli / Tam zamanlı" label="Sürekli / Tam zamanlı" />
-                                        <option value="Dönemsel / Proje bazlı" label="Dönemsel / Proje bazlı" />
-                                        <option value="Stajyer" label="Stajyer" />
-                                        <option value="Yarı zamanlı / Part Time" label="Yarı zamanlı / Part Time" />
-                                        <option value="Serbest Zamanlı" label="Serbest Zamanlı" />
-
-                                    </select>
-                                    {errors.workTime && touched.workTime && (
-                                        <div className="input-feedback">{errors.workTime}</div>
-                                    )}
+                                            </Select>
+                                        </FormField>
                                 </Grid.Column>
                             </Grid>
                             <div className="checkbox topMargin">
@@ -316,13 +317,13 @@ console.log(cities)
                                 <div className="input-feedback">{errors.agree}</div>
                             )}
 
-<FormField
-              id="form-button-control-public"
-              control={SubmitButton}
-              content="Confirm"
-              type="submit"
-              
-            />
+                            <FormField
+                                id="form-button-control-public"
+                                control={SubmitButton}
+                                content="Confirm"
+                                type="submit"
+
+                            />
 
 
                         </Form>
@@ -332,5 +333,4 @@ console.log(cities)
         </div >
     )
 
-    }
-
+}

@@ -34,14 +34,14 @@ name='Bize Katıl'
                         <Dropdown item text='İş veren'>
                             <Dropdown.Menu>
                                 <Dropdown.Item>Giriş yap</Dropdown.Item>
-                                <Dropdown.Item>Kayıt ol</Dropdown.Item>
-                                <Dropdown.Item>Ücretsiz dene</Dropdown.Item>
+                                <Dropdown.Item as={NavLink} to="/EmployerRegister">Kayıt ol</Dropdown.Item>
+                                <Dropdown.Item >Ücretsiz dene</Dropdown.Item>
                                 <Dropdown.Item as={NavLink} to="/AddJobPosting">İlan Yayınla</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
 
                         <Menu.Item>
-                            <Button primary>Sign Up</Button>
+                            <Button primary as={NavLink} to="/CandidateRegister">Sign Up</Button>
                         </Menu.Item>
                     </Menu.Menu>
 

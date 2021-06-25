@@ -4,6 +4,8 @@ import Categories from './Categories'
 import {Grid} from 'semantic-ui-react'
 import { Route } from 'react-router'
 import AddJobPosting from '../pages/AddJobPosting'
+import CandidateRegister from '../pages/CandidateRegister'
+import EmployerRegister from '../pages/EmployerRegister'
 
 export default function Dashboard() {
     return (
@@ -17,7 +19,8 @@ export default function Dashboard() {
                         <Route exact path="/" component={JobPostingList}/>
                         <Route exact path="/jobPostings" component={JobPostingList}/>
                         <Route path="/AddJobPosting" component={AddJobPosting}/>
-
+                        <Route path="/CandidateRegister" component={CandidateRegister}/>
+                        <Route path="/EmployerRegister" component={EmployerRegister}/>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
