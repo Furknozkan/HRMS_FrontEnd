@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import {  Card } from 'semantic-ui-react'
 import JobPostingService from "../services/JobPostingService"
-
 export default function JobPostingList() {
 
     const [jobPostings, setjobPostings] = useState([]);
+    
 
-   
-      
 
     useEffect(() => {
         let jobPostingService = new JobPostingService()
-        jobPostingService.getByEnableTrue().then(result => setjobPostings(result.data.data))
+        jobPostingService.getJobPostings().then(result => setjobPostings(result.data.data))
 
     }, [jobPostings])
 
@@ -39,6 +37,7 @@ export default function JobPostingList() {
                 ))}
             </Card.Group>
             
+            
         </div>
 
 
@@ -47,6 +46,6 @@ export default function JobPostingList() {
 
 
 
-        
+         
     )
 }

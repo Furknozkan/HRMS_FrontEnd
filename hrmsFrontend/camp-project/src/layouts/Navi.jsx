@@ -40,6 +40,10 @@ name='Bize Katıl'
                             </Dropdown.Menu>
                         </Dropdown>
 
+                         <Menu.Item>
+                            <Button primary as={NavLink} to="/CandidateCv">Cv Görüntüle</Button>
+                        </Menu.Item>
+
                         <Menu.Item>
                             <Button primary as={NavLink} to="/CandidateRegister">Sign Up</Button>
                         </Menu.Item>
