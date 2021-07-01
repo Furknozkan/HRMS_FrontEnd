@@ -1,9 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Button, Container, Dropdown, Menu } from 'semantic-ui-react'
-
+import { useSelector } from 'react-redux'
+import Favourites from './Favourites'
 
 function Navi() {
+    const {favouriteItems} = useSelector(state => state.favourite)
+    
+
     return (
         <div>
             <Menu size='large' inverted>
@@ -28,7 +32,11 @@ function Navi() {
                      <Menu.Item
 
 name='Bize Katıl'
-/>
+/>                      
+            <Menu.Menu position="right">
+                {favouriteItems.length>0&&<Favourites/>}
+            </Menu.Menu>
+                
 
                     <Menu.Menu position='right'>
                         <Dropdown item text='İş veren'>

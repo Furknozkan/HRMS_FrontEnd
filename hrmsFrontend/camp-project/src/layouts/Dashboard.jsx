@@ -12,9 +12,14 @@ import LanguagesUpdate from '../pages/CV/LanguagesUpdate'
 import SchoolUpdate from '../pages/CV/SchoolUpdate'
 import DepartmentUpdate from '../pages/CV/DepartmentUpdate'
 import ExperiencesUpdate from '../pages/CV/ExperiencesUpdate'
+import { ToastContainer } from "react-toastify";
+
+
 export default function Dashboard() {
     return (
         <div>
+                  <ToastContainer position="bottom-right"/>
+
             <Grid>
                 <Grid.Row>
                     <Grid.Column width={4}>
