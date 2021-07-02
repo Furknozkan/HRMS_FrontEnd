@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Pagination, Button } from 'semantic-ui-react'
+import { Card, Pagination, Button, Dropdown } from 'semantic-ui-react'
 import JobPostingService from "../services/JobPostingService"
 import { useDispatch } from 'react-redux';
 import { addToFavourite } from "../Store/actions/favouriteActions"
 import { toast } from "react-toastify";
-
-
+import JobPostingFilter from "../layouts/Filter/JobPostingFilters"
+import './JobPostingList.css';
 export default function JobPostingList(){
     const dispatch = useDispatch()
     const [jobPostings, setjobPostings] = useState([]);
@@ -17,20 +17,24 @@ export default function JobPostingList(){
 
     useEffect(() => {
         let jobPostingService = new JobPostingService()
-        jobPostingService.getByEnableTrue().then(result => setjobPostings(result.data.data))
+        jobPostingService.getByEnableAndPageNumberAndFilter(activePage, pageSize, filterOption)
+        .then((result) => {
+        setjobPostings(result.data.data);
+        setTotalPageSize(parseInt(result.data.message));
+    })
 
-    }, [jobPostings])
+    }, [filterOption, activePage, pageSize]);
 
 
     const handleFilterClick = (filterOption) => {
-        if (filterOption.city_id.length === 0) {
+        if (filterOption.city_id === 0) {
             filterOption.city_id = null;
         }
         
-        if (filterOption.workPlaceId.length === 0) {
+        if (filterOption.workPlaceId === 0) {
             filterOption.workPlaceId = null;
         }
-        if (filterOption.workTimeId.length === 0) {
+        if (filterOption.workTimeId === 0) {
             filterOption.workTimeId = null;
         }
         setFilterOption(filterOption);
@@ -49,6 +53,10 @@ export default function JobPostingList(){
 
     return (
         <div>
+            
+            <JobPostingFilter clickEvent={handleFilterClick}/>
+
+            
 
             <Card.Group>
                 {jobPostings.map((jobPosting) => (
@@ -73,8 +81,8 @@ export default function JobPostingList(){
                     
                 ))}
             </Card.Group> 
-            
-
+           
+          <div className="pagination">             
             <Pagination
                 firstItem={null}
                 lastItem={null}
@@ -82,7 +90,7 @@ export default function JobPostingList(){
                 onPageChange={handlePaginationChange}
                 totalPages={Math.ceil(totalPageSize / pageSize)}
             />
-
+            </div> 
 
         </div>
 
