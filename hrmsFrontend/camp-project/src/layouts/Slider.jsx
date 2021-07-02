@@ -14,6 +14,8 @@ const CarouselContainer = () => {
                     className="d-block w-100"
                     src={images1}
                     alt="Second slide"
+                    width="1280"
+                    height="720"
                 />
                 </Carousel.Item>
 
@@ -22,6 +24,8 @@ const CarouselContainer = () => {
                     className="d-block w-100"
                     src={images2}
                     alt="Second slide"
+                    width="1280"
+                    height="720"
                 />
 
             </Carousel.Item>
@@ -30,6 +34,8 @@ const CarouselContainer = () => {
                     className="d-block w-100"
                     src={images3}
                     alt="Third slide"
+                    width="1280"
+                    height="720"
                 />
 
                 
