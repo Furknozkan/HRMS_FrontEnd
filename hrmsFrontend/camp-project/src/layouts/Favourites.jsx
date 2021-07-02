@@ -2,7 +2,6 @@ import React from 'react'
 import {  NavLink } from 'react-router-dom';
 import { Dropdown,Label } from "semantic-ui-react"
 import { useSelector } from 'react-redux'
-import JobPostingService from '../services/JobPostingService';
 
 export default function Favourites() {
     const {favouriteItems} = useSelector(state => state.favourite)
