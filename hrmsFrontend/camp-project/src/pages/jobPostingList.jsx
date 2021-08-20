@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Pagination, Button, Dropdown } from 'semantic-ui-react'
+import { Card, Pagination, Button, Grid, Image, GridRow, GridColumn } from 'semantic-ui-react'
 import JobPostingService from "../services/JobPostingService"
 import { useDispatch } from 'react-redux';
 import { addToFavourite } from "../Store/actions/favouriteActions"
 import { toast } from "react-toastify";
 import JobPostingFilter from "../layouts/Filter/JobPostingFilters"
 import './JobPostingList.css';
+import { Link } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+ 
 export default function JobPostingList(){
     const dispatch = useDispatch()
     const [jobPostings, setjobPostings] = useState([]);
@@ -13,7 +16,11 @@ export default function JobPostingList(){
     const [activePage, setActivePage] = useState(1);
     const [pageSize] = useState(2);
     const [totalPageSize, setTotalPageSize] = useState(0);
-    
+    const text = () => (
+        <div className="favoriteLink">
+            <Link to="/favourite">Kaydedilenleri Gör</Link>
+        </div>
+    )
 
     useEffect(() => {
         let jobPostingService = new JobPostingService()
@@ -48,32 +55,58 @@ export default function JobPostingList(){
     const handleAddToFavourite=(jobPosting)=>{
         dispatch(addToFavourite(jobPosting));
 
-        toast.success(`Başarıyla Kaydedildi!`)
+        toast.success(text)
     }
 
     return (
         <div>
             
+            <Grid>
+                <Grid.Row>
+                    <Grid.Column width={4}>
+                         <div className="filter">
             <JobPostingFilter clickEvent={handleFilterClick}/>
-
-            
-
-            <Card.Group>
+            </div>
+                    </Grid.Column>
+                    <Grid.Column width={12}>
+                        <Card.Group>
                 {jobPostings.map((jobPosting) => (
 
                     <Card fluid color="blue" className="card-container" key={jobPosting.id}>
 
                         <Card.Content >
+                        <Image
+          floated='left'
+          size='mini'
+          src={jobPosting.avatarUrl}
+        />              
+                            
                             <Card.Header textAlign="left">{jobPosting.jobName}</Card.Header>
-                            <hr />
+                            
                             <Card.Header textAlign="left">{jobPosting.companyName}</Card.Header>
-                            <Card.Description textAlign="left" content={jobPosting.city.cityName} />
-                            <hr />
-                            <Card.Description textAlign="left" content={jobPosting.jobDescription} />
-                            <Card.Description textAlign="left" content={"Maaş: " + jobPosting.minSalary + " - " + jobPosting.maxSalary} />
-                            <Card.Description textAlign="left" content={"Açık pozisyon: " + jobPosting.numberOfOpenPositions} />
-                            <Card.Description textAlign="right" content={jobPosting.releaseDate} />
-                            <Button onClick={()=>handleAddToFavourite(jobPosting)}>Kaydet</Button>
+
+                            <div className="city">
+                                    <Card.Description textAlign="left" content={jobPosting.city.cityName} />
+
+                            </div>
+                          
+                            <Grid>
+                                <Grid.Row>
+                                    <Grid.Column width={4}>
+                                        <div className="save">
+                                         <Button onClick={()=>handleAddToFavourite(jobPosting)}>Kaydet</Button>
+                                         </div>
+                                    </Grid.Column>
+                                    <Grid.Column width={12}>
+                                    <div className="relaseDate">
+                                    <Card.Description textAlign="right" content={jobPosting.releaseDate} />
+                                    </div>
+                                    </Grid.Column>
+                                        
+                                  
+                                </Grid.Row>
+                            </Grid>
+                          
                         </Card.Content>
                       
                     </Card>
@@ -81,6 +114,14 @@ export default function JobPostingList(){
                     
                 ))}
             </Card.Group> 
+                    </Grid.Column>
+                </Grid.Row>
+
+            </Grid>
+           
+            
+
+            
            
           <div className="pagination">             
             <Pagination

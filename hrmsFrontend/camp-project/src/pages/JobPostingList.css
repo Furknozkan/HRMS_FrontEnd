@@ -1,3 +1,17 @@
 .pagination{
     margin-top: 50px;
+    margin-bottom: 15px;
+    margin-left: 265px;
+}
+
+.city{
+    margin-bottom: 20px;
+  
+   
+}
+.relaseDate{
+    margin-left: 170px;
+}
+.favoriteLink{
+    color: black;
 }
