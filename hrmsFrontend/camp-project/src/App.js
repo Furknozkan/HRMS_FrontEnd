@@ -16,14 +16,14 @@ function App() {
 
       
       <Navi />
-      <Slider />
+      
       <Container className="main">
         <Dashboard />
         
       </Container>
-      
-      <Footer />
-      
+      <div className="footer">
+     
+      </div>
       </div>
       
       
