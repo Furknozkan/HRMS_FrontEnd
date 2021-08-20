@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {  Button  } from "semantic-ui-react";
 import HrmsTextInput from '../../Utilities/customFormControls/HrmsTextInput'
+import CandidateService from "../../services/CandidateService"
 
 export default function CandidateUpdate() {
   const initialValues = { firstName: "", 
@@ -17,16 +18,16 @@ export default function CandidateUpdate() {
   programingLanguages: ""}
 
   const schema = Yup.object({
-    firstName: Yup.string().required(),
-    lastName: Yup.string().required(),
-    emailAddress: Yup.string().required(),
-    birthDate: Yup.date().required(),
-    coverLetter: Yup.string().required(),
-    identificationNumber: Yup.string().required(),
-    linkedin: Yup.string().required(),
-    github: Yup.string().required(),
-    password: Yup.string().required(),
-    programingLanguages: Yup.string().required()
+    firstName: Yup.string(),
+    lastName: Yup.string(),
+    emailAddress: Yup.string(),
+    birthDate: Yup.date(),
+    coverLetter: Yup.string(),
+    identificationNumber: Yup.string(),
+    linkedin: Yup.string(),
+    github: Yup.string(),
+    password: Yup.string(),
+    programingLanguages: Yup.string()
 
 
 
@@ -36,8 +37,16 @@ export default function CandidateUpdate() {
       <Formik 
       initialValues={initialValues} 
       validationSchema={schema}
-      onSubmit = {(values)=>{
-          console.log(values)
+      onSubmit ={(values, { setSubmitting } ) => {
+        CandidateService.update(values).then(response => console.log(response.data.message))
+        
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+      }, 400);
+     
+      
+         
       }}
       >
         <Form className="ui form">
