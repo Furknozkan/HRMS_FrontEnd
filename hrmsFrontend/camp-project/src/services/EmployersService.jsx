@@ -8,4 +8,8 @@ export default class EmployerService{
     addEmployer(){
         return axios.post("")
     }
+
+    getByEmpoyerId(){
+        return axios.get("http://localhost:8080/api/jobsposting/getByEmployerId?employerId=7")
+    }
 }
