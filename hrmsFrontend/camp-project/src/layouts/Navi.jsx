@@ -33,9 +33,7 @@ function Navi() {
 
 name='Bize Katıl'
 />                      
-            <Menu.Menu position="right">
-                {favouriteItems.length>0&&<Favourites/>}
-            </Menu.Menu>
+            
                 
 
                     <Menu.Menu position='right'>
@@ -43,7 +41,7 @@ name='Bize Katıl'
                             <Dropdown.Menu>
                                 <Dropdown.Item>Giriş yap</Dropdown.Item>
                                 <Dropdown.Item as={NavLink} to="/EmployerRegister">Kayıt ol</Dropdown.Item>
-                                <Dropdown.Item >Ücretsiz dene</Dropdown.Item>
+                                <Dropdown.Item  >İlanlarım</Dropdown.Item>
                                 <Dropdown.Item as={NavLink} to="/AddJobPosting">İlan Yayınla</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
